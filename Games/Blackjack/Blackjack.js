@@ -195,7 +195,7 @@ function dismissResult() {
 // ── SCORE SUBMIT ───────────────────────────────────────────────
 async function decisionWin(decis) {
     try {
-        await fetch("http://bend-production-72e5.up.railway.app/blackjack/receive", {
+        await fetch("https://bend-production-72e5.up.railway.app/blackjack/receive", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
