@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TIC TAC TOE // CYBER</title>
+        <link rel="stylesheet" href="TTT.css">
+    </head>
+    <body>
+
+        <!-- Corner decorations -->
+        <div class="corner-deco tl"></div>
+        <div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div>
+        <div class="corner-deco br"></div>
+
+        <!-- HUD Panel -->
+        <div id="Window">
+            <div id="user_tag">USER: <span id="uname_val"><span class="blink">_</span></span></div>
+
+
+
+            <button id="back" onclick="returnn()">&#x2190; EXIT</button>
+        </div>
+
+        <!-- Game Board -->
+        <div id="Board">
+            <div id="board-title" data-text="TIC·TAC·TOE">TIC·TAC·TOE</div>
+            <div id="turn-indicator">INITIALIZING<span class="blink">...</span></div>
+
+            <div id="main_b">
+                <div onclick="board(0,this)"></div>
+                <div onclick="board(1,this)"></div>
+                <div onclick="board(2,this)"></div>
+                <div onclick="board(3,this)"></div>
+                <div onclick="board(4,this)"></div>
+                <div onclick="board(5,this)"></div>
+                <div onclick="board(6,this)"></div>
+                <div onclick="board(7,this)"></div>
+                <div onclick="board(8,this)"></div>
+            </div>
+        </div>
+
+        <!-- Result Overlay -->
+        <div id="status-overlay">
+            <div id="status-box">
+                <div id="status-text"></div>
+                <div id="status-sub"></div>
+                <button id="status-continue" onclick="dismissStatus()">[ PLAY AGAIN ]</button>
+            </div>
+        </div>
+
+        <script src="../MainJs.js"></script>
+        <script src="TTT.js"></script>
+    </body>
+</html>

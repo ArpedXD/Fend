@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Dodge</title>
+        <link rel="stylesheet" href="Dodge.css">
+    </head>
+    <body>
+
+        <!-- MAIN MENU -->
+        <div class="menu active" id="menu">
+            <button class="exit" onclick="window.location.href = '../../index.html'">Exit</button>
+            DEFLECT
+            <div class="subtitle">deflect 20 spikes to win</div>
+
+            <div class="controls">
+                <span>W</span> — top shield &nbsp;|&nbsp; <span>S</span> — bottom shield<br>
+                <span>A</span> — left shield &nbsp;|&nbsp; <span>D</span> — right shield
+            </div>
+
+            <div id="text-score">
+                <div style="display:flex;justify-content:space-between;padding:12px 32px;font-size:40%;color:#fff;letter-spacing:3px;">
+                    <div>Wins</div><div>Losses</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:0 40px 12px;font-size:45%;color:#00ffe0;letter-spacing:3px;">
+                    <div id="stat-wins">0</div>
+                    <div id="stat-losses">0</div>
+                </div>
+            </div>
+
+            <div class="status" onclick="startGame()">Start Game</div>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div class="game" id="game">
+            <div id="game-title">DODGE</div>
+
+            <div class="stats">
+                <div class="hearts">Hearts: <span id="hearts">3</span> ♥</div>
+                <div class="score">Score: <span id="score">0</span>/20</div>
+            </div>
+
+            <div class="user" id="user">
+                <div class="shield" id="shield"></div>
+            </div>
+        </div>
+
+        <!-- TOAST -->
+        <div class="toast" id="toast">
+            <div class="toast-dot"></div>
+            <span id="toast-msg"></span>
+        </div>
+
+        <script src="Dodge.js"></script>
+    </body>
+</html>

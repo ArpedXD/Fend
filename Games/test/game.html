@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Harold bird</title>
+        <link rel="stylesheet" href="game.css">
+    </head>
+    <body>
+        <div id="game_score">Score : 0</div>
+        <div id="je"></div>
+        <div class="menu active" id="menu">
+            
+            <button class="exit" onclick="window.location.href = '../../index.html'">Exit</button>
+            <button class="Ai" onclick="Aimode()">AI Mode</button>
+            Jump Bird
+            <div id="status" class="status" onclick="res()">Start</div>
+            <div id="text-score">
+                <div class="men">
+                    <div>Wins</div>
+                    <div>Lose</div>
+                </div>
+                <div class="scoress">
+                    <div id="win">0</div>
+                    <div id="lose">0</div>
+                </div>
+            <div class="status" onclick="changechar()">Change character</div>
+            <div class="status" onclick="changetheme()">Change Theme</div>
+            </div>
+        </div>
+
+        <div class="menu " id="menu2">
+            <button class="return" onclick="changechar()">Return</button>    
+            <div id="text-score">
+                <div class="men">
+                    <div >Character change</div>
+                </div>
+                <div class="men2">
+                    <div class="chars"> 
+                        <div>
+                            <img src="image/mountains.jpg" onclick="img('image/mountains.jpg')">
+                        </div>
+                        <div>
+                            <img src="image/Yin_yang.png" onclick="img('image/Yin_yang.png')">
+                        </div>
+                        <div>
+                            <img src="image/spike.png" onclick="img('image/spike.png')">
+                        </div>
+                        <div>
+                            <img src="image/illusion.jpg" onclick="img('image/illusion.jpg')">
+                        </div>
+                        <div>
+                            <img src="image/Bluish.jpg" onclick="img('image/Bluish.jpg')">
+                        </div>
+                        <div>
+                            <img src="image/Cl.png" onclick="img('image/Cl.png')">
+                        </div>
+                        <div>
+                            <img src="image/glow.gif" onclick="img('image/glow.gif')">
+                        </div>
+                        <div>
+                            <img src="image/blackhole.png" onclick="img('image/blackhole.png')">
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu" id="menu3">
+            <button class="return" onclick="changetheme()">Return</button>
+            <div id="text-score">
+                <div class="men">
+                    <div>Customizability</div>
+                </div>
+                <div class="men2">
+                    <div class="chars"> 
+                        <div class="setting-item">
+                            Background-color
+                            <input type="color" id="color-wheel" onchange="colorc(this,'bg')" name="colorWheel" value="#3498db">
+                            Character-Glow
+                            <input type="color" id="color-wheel" onchange="colorc(this,'cg')" name="colorWheel" value="#3498db">
+                            KillBlocks-Color
+                            <input type="color" id="color-wheel" onchange="colorc(this,'fircol')" name="colorWheel" value="#3498db">
+                            <input type="color" id="color-wheel" onchange="colorc(this,'seccol')" name="colorWheel" value="#3498db">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Floatingcharacter" class="floatchar">
+
+        </div>
+
+        <div class="toast" id="toast">
+            <div class="toast-dot"></div>
+            <span id="toast-msg"></span>
+        </div>
+        <script src="game.js"></script>
+    </body>
+</html>

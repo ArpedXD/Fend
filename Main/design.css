@@ -1,0 +1,716 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+
+/* ─── Variables ─── */
+:root {
+    --cyan:    #00e5ff;
+    --red:     #ff1744;
+    --white:   #f0f0f0;
+    --dark:    #0a0a0a;
+    --panel:   rgba(0,0,0,0.6);
+    --border:  rgba(0, 229, 255, 0.18);
+    --glow-c:  0 0 12px var(--cyan), 0 0 30px rgba(0,229,255,0.3);
+    --glow-r:  0 0 12px var(--red),  0 0 30px rgba(255,23,68,0.3);
+    --font-display: 'Bebas Neue', 'ICA Rubrik', sans-serif;
+    --font-mono:    'Space Mono', 'Source Code Pro', monospace;
+    --transition:   0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--dark);
+    color: var(--white);
+    font-family: var(--font-mono);
+}
+
+/* ─── Particle Canvas ─── */
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ─── Scanlines ─── */
+#scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.08) 3px,
+        rgba(0, 0, 0, 0.08) 4px
+    );
+}
+
+/* ─── Corner Decorations ─── */
+.corner {
+    position: fixed;
+    width: 40px; height: 40px;
+    z-index: 10;
+    pointer-events: none;
+}
+.corner::before, .corner::after {
+    content: '';
+    position: absolute;
+    background: var(--cyan);
+    box-shadow: var(--glow-c);
+}
+.corner::before { width: 100%; height: 2px; }
+.corner::after  { width: 2px; height: 100%; }
+.corner-tl { top: 16px; left: 16px; }
+.corner-tr { top: 16px; right: 16px; transform: scaleX(-1); }
+.corner-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+.corner-br { bottom: 16px; right: 16px; transform: scale(-1); }
+
+/* ─── Screen Wipe ─── */
+#HIDE {
+    position: fixed;
+    inset: 0;
+    width: 0%;
+    background: var(--dark);
+    z-index: 9999;
+    transition: width 1.2s cubic-bezier(0.7, 0, 1, 0.3);
+}
+
+/* ─── Header ─── */
+#header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+}
+
+#logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.logo-main {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    letter-spacing: 0.05em;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+    animation: logoPulse 4s ease-in-out infinite;
+}
+.logo-sub {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--cyan);
+    margin-top: 2px;
+}
+
+@keyframes logoPulse {
+    0%, 100% { text-shadow: 0 0 10px var(--cyan), 0 0 30px rgba(0,229,255,0.4); }
+    50%       { text-shadow: 0 0 20px var(--cyan), 0 0 60px rgba(0,229,255,0.6), 0 0 100px rgba(0,229,255,0.2); }
+}
+
+#top-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color var(--transition);
+    cursor:pointer;
+}
+.nav-link:hover { color: var(--cyan); text-shadow: var(--glow-c); }
+
+#logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 23, 68, 0.4);
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: none;
+}
+#logout-btn.visible { display: block; }
+#logout-btn:hover {
+    background: rgba(255,23,68,0.1);
+    box-shadow: var(--glow-r);
+    border-color: var(--red);
+}
+
+/* ─── Status Bar ─── */
+#status-bar {
+    position: fixed;
+    bottom: 18px;
+    left: 32px;
+    z-index: 50;
+    display: flex;
+    gap: 24px;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.3);
+}
+.status-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow: 0 0 8px #00ff88;
+    margin-right: 6px;
+    animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ─── Hero Image ─── */
+#hero-img {
+    position: fixed;
+    right: -2%;
+    bottom: 0;
+    width: min(55vw, 900px);
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    animation: heroFloat 6s ease-in-out infinite;
+}
+#hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+    filter: drop-shadow(0 0 20px var(--cyan)) drop-shadow(0 0 60px rgba(0,229,255,0.3));
+    transition: filter 0.6s ease;
+}
+
+/* Remove class-based overrides — filter is now set directly via JS */
+#hero-glow {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 100%; height: 50%;
+    background: radial-gradient(ellipse at 60% 100%, rgba(0,229,255,0.15) 0%, transparent 70%);
+}
+@keyframes heroFloat {
+    0%,100% { transform: translateY(0px); }
+    33%      { transform: translateY(-12px) translateX(5px); }
+    66%      { transform: translateY(-6px) translateX(-3px); }
+}
+
+
+
+/* ─── Main Menu ─── */
+#main-menu {
+    position: fixed;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.menu-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--cyan);
+    margin-bottom: 12px;
+}
+.menu-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    letter-spacing: 0.08em;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: left;
+    width: 260px;
+    overflow: hidden;
+}
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--cyan);
+    transition: width 0.4s ease;
+    box-shadow: var(--glow-c);
+}
+.menu-btn:hover { color: var(--white); letter-spacing: 0.14em; }
+.menu-btn:hover::before { width: 100%; }
+.menu-btn:hover .btn-arrow { transform: translateX(6px); opacity: 1; color: var(--cyan); }
+.menu-btn:hover .btn-index { color: var(--cyan); }
+
+.btn-index {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.25);
+    font-family: var(--font-mono);
+    transition: color var(--transition);
+    min-width: 20px;
+}
+.btn-text { flex: 1; }
+.btn-arrow {
+    opacity: 0;
+    transition: all var(--transition);
+    font-size: 1rem;
+}
+
+/* ─── Game Selection Overlay ─── */
+#game-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+#game-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+#game-overlay-inner {
+    width: min(1100px, 95vw);
+    padding: 40px;
+}
+
+#overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+#overlay-header h2 {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+}
+#overlay-close {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.4);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+#overlay-close:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* ─── Game Grid ─── */
+#game-grid {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+.game-card.card-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.game-card {
+    position: relative;
+    flex: 1;
+    height: 260px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.game-card:not(.locked):hover {
+    border-color: var(--cyan);
+    box-shadow: var(--glow-c), inset 0 0 40px rgba(0,229,255,0.05);
+    transform: translateY(-6px);
+}
+.game-card.locked {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.card-bg {
+    position: absolute;
+    inset: 0;
+    background-image: var(--img);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.25) saturate(0.5);
+    transition: filter var(--transition);
+}
+.game-card:not(.locked):hover .card-bg {
+    filter: brightness(0.55) saturate(1.2);
+}
+
+.card-shimmer {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+    transition: left 0.7s ease;
+}
+.game-card:not(.locked):hover .card-shimmer { left: 150%; }
+
+.card-content {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    z-index: 2;
+}
+.card-num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 6px;
+    opacity: 0.7;
+}
+.card-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: 4px;
+}
+.card-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.35);
+}
+.card-hover-bar {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--cyan);
+    box-shadow: var(--glow-c);
+    transition: width 0.5s ease;
+}
+.game-card:not(.locked):hover .card-hover-bar { width: 100%; }
+.lock-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    opacity: 0.3;
+}
+
+/* ─── Game Info Panel ─── */
+#game-info-panel {
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    background: rgba(0, 229, 255, 0.03);
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+#game-info-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    margin-bottom: 8px;
+}
+#game-info-desc {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.05em;
+    max-width: 700px;
+}
+
+#Gefx span{
+  display:block;
+  background-color:var(--cyan);
+  position:absolute;
+  left:var(--posl);
+  width:50px;
+  margin:1px;
+  height:50px;
+  animation:up var(--x) linear infinite;
+  box-shadow: 5px 5px 50px var(--cyan);
+  transition:1s;
+  z-index:5;
+}
+
+/* Settings Styles */
+#settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#settings-overlay.active {
+    display: flex;
+}
+
+#settings-overlay-inner {
+    background: transparent;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
+}
+
+#settings-overlay-inner h1 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+#line {
+    height: 2px;
+    background-color:white;
+    margin-bottom: 20px;
+}
+
+.setting-item {
+    margin-bottom: 20px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.setting-item input[type="color"] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.setting-item select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 14px;
+}
+
+.setting-item input[type="range"] {
+    width: calc(100% - 60px);
+    margin-right: 10px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 1;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    transition: 0.4s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+    background-color: #3498db;
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+/* Save Button */
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.save-btn:hover {
+    background: #2980b9;
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+#save-status {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#save-status.success {
+    color: #2ecc71;
+}
+
+#save-status.error {
+    color: #e74c3c;
+}
+
+/* ─── Entrance Animations ─── */
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes up{
+  0%{
+    transform: translateY(125vh) rotate(90deg);
+  }100%{
+    transform: translateY(-50px); 
+  }
+}
+
+#main-menu   { animation: slideUp 0.8s 0.3s both; }
+#status-bar  { animation: slideUp 0.6s 0.5s both; }
+#header      { animation: slideUp 0.6s 0.1s both; }
+
+.about{
+    background:linear-gradient(140deg, rgb(7, 0, 32),rgb(27, 19, 53) );
+    border:1px solid rgb(0, 255, 221);
+    filter:drop-shadow(0 0 5px rgb(0, 255, 255));
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-250%);
+    text-align: center;
+    padding:2vh;
+    font-size: 200%;
+    font-family:var(--font-display);
+    height:80vh;
+    width:100vh;;
+    position:fixed;
+    transition:1s;
+    z-index:300;
+}
+
+.about.active{
+    transform:translate(-50%,-50%);
+}
+
+.about .Body{
+    height:90%;
+    width:90%;
+    position:relative;
+    font-size: 3vh;
+    padding:3vh;
+    left:50%;
+    transform: translateX(-50%);
+    background:rgba(255, 255, 255, 0.11);
+    border:1px solid rgb(0, 255, 255);
+    text-align: justify;
+    animation:ar 4s ease-in-out infinite;
+}
+
+.toast-container {
+  position: fixed;
+  top: 90%;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  border:1px solid cyan;
+  min-width: 250px;
+  background: #333;
+  color: #fff;
+  padding: 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-shadow: 0px 0px 5px cyan;
+  animation: slideIn 0.5s ease forwards;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.toast.hide {
+  animation: slideOut 0.5s ease forwards;
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes ar{
+    0%{
+        background:rgba(255, 255, 255, 0.11);
+    }50%{
+        background:rgba(255, 255, 255, 0.048);
+    }100%{
+        background:rgba(255, 255, 255, 0.11);
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>N5XT — PING PONG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pingpong.css">
+</head>
+<body>
+
+    <div id="scanlines"></div>
+
+    <!-- Scores -->
+    <div id="hud">
+        <div class="score-block">
+            <span class="score-label">YOU</span>
+            <span class="score-value" id="user-score">0</span>
+        </div>
+        <div id="hud-center">
+            <span id="game-status">PRESS SPACE TO START</span>
+        </div>
+        <div class="score-block">
+            <span class="score-label">CPU</span>
+            <span class="score-value" id="enemy-score">0</span>
+        </div>
+    </div>
+
+    <!-- Arena -->
+    <div id="box">
+        <div id="center-line"></div>
+        <div id="ball"></div>
+        <div id="enemy"></div>
+        <div id="user"></div>
+    </div>
+
+    <!-- Controls hint -->
+    <div id="controls">A / D &nbsp;·&nbsp; MOVE &nbsp;&nbsp;|&nbsp;&nbsp; SPACE &nbsp;·&nbsp; START / PAUSE</div>
+
+    <!-- Back button -->
+    <button id="back-btn" onclick="window.location.href = '../../index.html'">&#8592; BACK</button>
+
+    <script src="pingpong.js"></script>
+</body>
+</html>

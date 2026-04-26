@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N5XT</title>
+    <link rel="stylesheet" href="Main/design.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/ica-rubrik-black">
+</head>
+<body>
+    <div id="Gefx">
+            <span style="--x:2.5s; --posl:10%;"></span>
+            <span style="--x:1.9s; --posl:20%;"></span>
+            <span style="--x:2s; --posl:30%;"></span>
+            <span style="--x:3s; --posl:40%;"></span>
+            <span style="--x:4.3s; --posl:50%;"></span>
+            <span style="--x:4.9s; --posl:60%;"></span>
+            <span style="--x:2.2s; --posl:70%;"></span>
+            <span style="--x:1.5s; --posl:80%;"></span>
+            <span style="--x:4.5s; --posl:90%;"></span>
+    </div>
+
+    <!-- Screen wipe transition -->
+    <div id="HIDE"></div>
+
+    <!-- Particle background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Scanline overlay -->
+    <div id="scanlines"></div>
+
+    <!-- Corner decorations -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div id="logo">
+            <span class="logo-main">N5XT</span>
+            <span class="logo-sub">GAMING PLATFORM</span>
+        </div>
+        <nav id="top-nav">
+            <div class="nav-link" onclick="abt()">About</div>
+            <button id="logout-btn" onclick="Logout()">[ LOGOUT ]</button>
+        </nav>
+    </header>
+
+    <!-- Hero character image -->
+    <div id="hero-img">
+        <img src="Image/cool.png" id="imgr" alt="Character">
+        <div id="hero-glow"></div>
+    </div>
+
+    <!-- Status bar -->
+    <div id="status-bar">
+        <span class="status-item"><span class="status-dot"></span>SYSTEM ONLINE</span>
+        <span class="status-item">VER 2.0.4</span>
+        <span class="status-item" id="clock"></span>
+    </div>
+
+    <!-- Main menu -->
+    <nav id="main-menu">
+        <div class="menu-label">// NAVIGATE</div>
+        <button class="menu-btn" onclick="startups()">
+            <span class="btn-index">01</span>
+            <span class="btn-text">START</span>
+            <span class="btn-arrow">→</span>
+        </button>
+        <button class="menu-btn" onclick="account()">
+            <span class="btn-index">02</span>
+            <span class="btn-text">ACCOUNT</span>
+            <span class="btn-arrow">→</span>
+        </button>
+        <button class="menu-btn" onclick="Scores()">
+            <span class="btn-index">03</span>
+            <span class="btn-text">HIGH SCORES</span>
+            <span class="btn-arrow">→</span>
+        </button>
+        <button class="menu-btn" onclick="Settings()">
+            <span class="btn-index">04</span>
+            <span class="btn-text">SETTINGS</span>
+            <span class="btn-arrow">→</span>
+        </button>
+    </nav>
+
+    <!-- Game selection overlay -->
+    <div id="game-overlay">
+        <div id="game-overlay-inner">
+            <div id="overlay-header">
+                <h2>SELECT GAME</h2>
+                <button id="overlay-close" onclick="closeOverlay()">✕ CLOSE</button>
+            </div>
+            <div id="game-grid">
+                <div class="game-card" style="--img:url('../Image/card.jpeg')" onmouseover="hoverText(0)" onclick="Blackjack()">
+                    <div class="card-bg"></div>
+                    <div class="card-shimmer"></div>
+                    <div class="card-content">
+                        <span class="card-num">01</span>
+                        <h3 class="card-title">BLACK JACK</h3>
+                        <p class="card-tag">CARD GAME</p>
+                    </div>
+                    <div class="card-hover-bar"></div>
+                </div>
+                <div class="game-card" style="--img:url('../Image/TTT.jpg')" onmouseover="hoverText(1)" onclick="TTT()">
+                    <div class="card-bg"></div>
+                    <div class="card-shimmer"></div>
+                    <div class="card-content">
+                        <span class="card-num">02</span>
+                        <h3 class="card-title">TIC TAC TOE</h3>
+                        <p class="card-tag">STRATEGY</p>
+                    </div>
+                    <div class="card-hover-bar"></div>
+                </div>
+                <div class="game-card" style="--img:url('../Image/pingpong.png')" onmouseover="hoverText(2)" onclick="pingpong()">
+                    <div class="card-bg"></div>
+                    <div class="card-shimmer"></div>
+                    <div class="card-content">
+                        <span class="card-num">03</span>
+                        <h3 class="card-title">PING PONG</h3>
+                        <p class="card-tag">STRATEGY</p>
+                    </div>
+                    <div class="card-hover-bar"></div>  
+                </div>
+                <div class="game-card" style="--img:url('../Image/Jumpy.png')" onmouseover="hoverText(3)" onclick="bird()">
+                    <div class="card-bg"></div>
+                    <div class="card-shimmer"></div>
+                    <div class="card-content">
+                        <span class="card-num">04</span>
+                        <h3 class="card-title">Jump Bird</h3>
+                        <p class="card-tag">FUN</p>
+                    </div>
+                </div>
+                <div class="game-card" style="--img:url('../Image/Dodgy.png')" onmouseover="hoverText(4)" onclick="Dodge()">
+                    <div class="card-bg"></div>
+                    <div class="card-shimmer"></div>
+                    <div class="card-content">
+                        <span class="card-num">05</span>
+                        <h3 class="card-title">DEFLECT</h3>
+                        <p class="card-tag">FAST PACED</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Game info panel -->
+            <div id="game-info-panel">
+                <div id="game-info-name">—</div>
+                <div id="game-info-desc">Hover a game to see details.</div>
+            </div>
+        </div>
+    </div>
+    <div id="settings-overlay">
+        <div id="settings-overlay-inner">
+            <h1>SETTINGS</h1>
+            <div id="line"></div>
+            <div id="settings-main">
+                <!-- Color Wheel Setting -->
+                <div class="setting-item">
+                    <label for="color-wheel">Theme Color</label>
+                    <input type="color" id="color-wheel" name="colorWheel" value="#3498db">
+                </div>
+
+                <!-- Save Button -->
+                <button id="save-settings" class="save-btn">Save Settings</button>
+                <div id="save-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about" id="about">
+        <div class="Header">About Us</div>
+        <div class="Body">What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+</div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+    <script src="Main/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>N5XT — Login</title>
+    <link rel="stylesheet" href="Login/style.css"/>
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <div class="logo">N5<span>XT</span></div>
+
+      <div class="card" id="mainCard">
+
+        <!-- TABS -->
+        <div class="tabs" id="mainTabs">
+          <button class="tab active" onclick="switchTabAndSwitch('login')">LOGIN</button>
+          <button class="tab" onclick="switchTabAndSwitch('signup')">SIGNUP</button>
+        </div>
+
+        <!-- ═══════════ LOGIN ═══════════ -->
+        <div class="page active" id="page-login">
+          <div class="card-title">Welcome back</div>
+          <div class="card-sub">// ENTER CREDENTIALS TO CONTINUE</div>
+
+          <div class="field">
+            <label>Username</label>
+            <input type="text" id="login-user" placeholder="your_username" autocomplete="username"/>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+          </div>
+
+          <button class="btn" onclick="doLogin(this)">LOGIN →</button>
+
+          <div class="link-row">
+            <a onclick="switchPage('otp')">Forgot password?</a>
+            &nbsp;·&nbsp;
+            <a onclick="switchTabAndSwitch('signup')">Create account</a>
+          </div>
+        </div>
+
+        <!-- ═══════════ SIGNUP ═══════════ -->
+        <div class="page" id="page-signup">
+          <div class="card-title">Create account</div>
+          <div class="card-sub">// JOIN THE LEADERBOARD</div>
+
+          <div class="field">
+            <label>Username</label>
+            <input type="text" id="su-user" placeholder="cool_username"/>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="su-email" placeholder="you@example.com"/>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="su-pass" placeholder="••••••••"
+                  oninput="updateStrength(this.value)"/>
+            <div class="strength-bar">
+              <div class="strength-seg" id="seg1"></div>
+              <div class="strength-seg" id="seg2"></div>
+              <div class="strength-seg" id="seg3"></div>
+              <div class="strength-seg" id="seg4"></div>
+            </div>
+            <div class="strength-label" id="strength-label">Type a password</div>
+          </div>
+
+          <button class="btn" onclick="doSignup(this)">CREATE ACCOUNT →</button>
+
+          <div class="link-row">
+            Already have an account? <a onclick="switchTabAndSwitch('login')">Log in</a>
+          </div>
+        </div>
+
+        <!-- ═══════════ FORGOT PASSWORD — Email + OTP ═══════════ -->
+        <div class="page" id="page-otp">
+          <div class="card-title">Verify identity</div>
+          <div class="card-sub">// RESET YOUR PASSWORD</div>
+
+          <div class="field">
+            <label>Email address</label>
+            <input type="email" id="otp-email" placeholder="you@example.com"/>
+          </div>
+
+          <button class="btn btn-ghost" style="margin-bottom:8px" onclick="sendOtp(this)">
+            SEND OTP →
+          </button>
+
+          <div class="divider">ENTER CODE</div>
+
+          <p class="otp-hint">Enter the 6-digit code sent to your email</p>
+          <div class="otp-group" id="otpInputs">
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,0,'otpInputs')" onkeydown="otpBack(event,0,'otpInputs')"/>
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,1,'otpInputs')" onkeydown="otpBack(event,1,'otpInputs')"/>
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,2,'otpInputs')" onkeydown="otpBack(event,2,'otpInputs')"/>
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,3,'otpInputs')" onkeydown="otpBack(event,3,'otpInputs')"/>
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,4,'otpInputs')" onkeydown="otpBack(event,4,'otpInputs')"/>
+            <input type="text" maxlength="1"
+                  oninput="otpNext(this,5,'otpInputs')" onkeydown="otpBack(event,5,'otpInputs')"/>
+          </div>
+
+          <button class="btn" onclick="verifyOtp(this)">VERIFY CODE →</button>
+
+          <div class="resend-row">
+            Didn't get it?
+            <button class="resend-btn" id="forgotResendBtn" onclick="resendForgotOtp()" disabled>
+              Resend in <span id="countdown">60</span>s
+            </button>
+          </div>
+
+          <div class="link-row"><a onclick="switchPage('login')">← Back to login</a></div>
+        </div>
+
+        <!-- ═══════════ CHANGE PASSWORD ═══════════ -->
+        <div class="page" id="page-changepass">
+          <div class="card-title">New password</div>
+          <div class="card-sub">// SET YOUR NEW CREDENTIALS</div>
+
+          <div class="field">
+            <label>New password</label>
+            <input type="password" id="cp-new" placeholder="••••••••"
+                  oninput="updateStrength2(this.value)"/>
+            <div class="strength-bar">
+              <div class="strength-seg" id="cseg1"></div>
+              <div class="strength-seg" id="cseg2"></div>
+              <div class="strength-seg" id="cseg3"></div>
+              <div class="strength-seg" id="cseg4"></div>
+            </div>
+            <div class="strength-label" id="cstrength-label">Type a password</div>
+          </div>
+          <div class="field">
+            <label>Confirm password</label>
+            <input type="password" id="cp-confirm" placeholder="••••••••"/>
+          </div>
+
+          <button class="btn" onclick="doChangePass(this)">UPDATE PASSWORD →</button>
+          <div class="link-row"><a onclick="switchPage('login')">← Cancel</a></div>
+        </div>
+
+      </div><!-- /card -->
+    </div><!-- /wrapper -->
+
+    <!-- ═══════════ OTP POPUP MODAL (login & signup) ═══════════ -->
+    <div class="modal-backdrop" id="modal-backdrop">
+      <div class="modal">
+        <button class="modal-close" onclick="closeOtpModal()">✕ ESC</button>
+
+        <div class="modal-icon">🔐</div>
+        <div class="modal-title">Check your email</div>
+        <p class="modal-sub">
+          We sent a 6-digit code to<br/>
+          <span id="modal-email-display"></span>
+        </p>
+
+        <div class="otp-group" id="modalOtpInputs">
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,0,'modalOtpInputs')" onkeydown="otpBack(event,0,'modalOtpInputs')"/>
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,1,'modalOtpInputs')" onkeydown="otpBack(event,1,'modalOtpInputs')"/>
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,2,'modalOtpInputs')" onkeydown="otpBack(event,2,'modalOtpInputs')"/>
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,3,'modalOtpInputs')" onkeydown="otpBack(event,3,'modalOtpInputs')"/>
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,4,'modalOtpInputs')" onkeydown="otpBack(event,4,'modalOtpInputs')"/>
+          <input type="text" maxlength="1"
+                oninput="otpNext(this,5,'modalOtpInputs')" onkeydown="otpBack(event,5,'modalOtpInputs')"/>
+        </div>
+
+        <button class="btn" onclick="verifyModalOtp(this)">VERIFY & CONTINUE →</button>
+
+        <div class="modal-resend">
+          Didn't get it?
+          <button id="modal-resend-btn" onclick="modalResendOtp()" disabled>
+            Resend in <span id="modal-countdown">60</span>s
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <!-- TOAST -->
+      <div class="toast" id="toast">
+        <div class="toast-dot"></div>
+        <span id="toast-msg"></span>
+      </div>
+
+      <div class="return" id="return" onclick="window.location.href = 'index.html'">Return</div>
+    <script src="Login/script.js"></script>
+  </body>
+</html>

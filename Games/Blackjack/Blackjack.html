@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BLACKJACK // CYBER</title>
+        <link rel="stylesheet" href="Blackjack.css">
+        <link rel="stylesheet" href="keyframes.css">
+    </head>
+    <body>
+
+        <!-- Intro wipe -->
+        <div id="HIDE"></div>
+
+        <!-- Scanline overlay -->
+        <div id="scanlines"></div>
+
+        <!-- Corner decorations -->
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <!-- HUD Panel -->
+        <div id="Window">
+            <div class="hud-label">// PLAYER HUD</div>
+            <div id="user_tag">USER: <span id="uname_val"><span class="blink">_</span></span></div>
+
+            <button id="back" onclick="returnn()">&#x2190; EXIT</button>
+        </div>
+
+        <!-- Enemy zone -->
+        <div id="enemy_zone">
+            <div class="zone-label">DEALER</div>
+            <div id="enemy_score_display">
+                <span class="zone-sub">HAND</span>
+                <span id="enemy_total" class="hand-total">?</span>
+            </div>
+            <div id="enemy_c"></div>
+        </div>
+
+        <!-- Middle hit button -->
+        <div id="hit_zone">
+            <button onclick="callHit()" id="hit" class="hit">
+
+            </button>
+        </div>
+
+        <!-- Player hand label -->
+        <div id="player_zone_label">
+            <div class="zone-label">PLAYER</div>
+            <div id="player_score_display">
+                <span class="zone-sub">HAND</span>
+                <span id="player_total" class="hand-total">0</span>
+            </div>
+        </div>
+
+        <!-- Player card tray -->
+        <div id="user_deck">
+            <div id="Card_c"></div>
+        </div>
+
+        <!-- Stand button -->
+        <button onclick="callStand()" id="stand">
+            <span>STAND</span>
+            <span class="btn-sub">HOLD HAND</span>
+        </button>
+
+        <!-- Result overlay -->
+        <div id="result-overlay">
+            <div id="result-box">
+                <div id="result-tag"></div>
+                <div id="result-title"></div>
+                <div id="result-detail"></div>
+                <button id="result-btn" onclick="dismissResult()">[ NEXT ROUND ]</button>
+            </div>
+        </div>
+
+        <script src="../MainJs.js"></script>
+        <script src="BJD.js"></script>
+        <script src="Blackjack.js"></script>
+        <script src="Css.js"></script>
+    </body>
+</html>

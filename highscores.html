@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Highscores</title>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="Main/highscores.css">
+    </head>
+    <body>
+        <div class="wrapper">
+        <header>
+            <div class="title-block">
+            <h1>HIGHSCORES</h1>
+            <p>Global Rankings — All Games</p>
+            </div>
+            <div class="live-badge"><span class="dot"></span>Live Data</div>
+            <button class="back-btn" onclick="goBack()">← Back</button>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search player..." oninput="renderTable()"/>
+            <select id="gameFilter" onchange="renderTable()">
+            <option value="">All Games</option>
+            </select>
+            <select id="sortBy" onchange="renderTable()">
+                <option value="wins">Sort: Most Wins</option>
+                <option value="winrate">Sort: Win Rate</option>
+                <option value="losses">Sort: Most Losses</option>
+                <option value="total">Sort: Total Games</option>
+            </select>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>Game</th>
+                <!-- FIX: Pass `this` so setSortCol knows which <th> to mark as sorted -->
+                <th class="sortable sorted" onclick="setSortCol('wins', this)">Wins</th>
+                <th class="sortable" onclick="setSortCol('losses', this)">Losses</th>
+                <th>Win Rate</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr><td colspan="6"><div class="state-msg"><div class="spinner"></div></div></td></tr>
+            </tbody>
+            </table>
+        </div>
+
+        <footer>GAME_SYSTEM DATABASE &nbsp;·&nbsp; <span id="lastUpdated">—</span></footer>
+        </div>
+
+        <script src="Main/highscores.js"></script>
+    </body>
+</html>
