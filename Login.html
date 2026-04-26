@@ -94,17 +94,17 @@
           <p class="otp-hint">Enter the 6-digit code sent to your email</p>
           <div class="otp-group" id="otpInputs">
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,0,'otpInputs')" onkeydown="otpBack(event,0,'otpInputs')"/>
+                  oninput="otpNext(this,0,'otpInputs')" onkeydown="otpBack(event,0,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,1,'otpInputs')" onkeydown="otpBack(event,1,'otpInputs')"/>
+                  oninput="otpNext(this,1,'otpInputs')" onkeydown="otpBack(event,1,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,2,'otpInputs')" onkeydown="otpBack(event,2,'otpInputs')"/>
+                  oninput="otpNext(this,2,'otpInputs')" onkeydown="otpBack(event,2,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,3,'otpInputs')" onkeydown="otpBack(event,3,'otpInputs')"/>
+                  oninput="otpNext(this,3,'otpInputs')" onkeydown="otpBack(event,3,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,4,'otpInputs')" onkeydown="otpBack(event,4,'otpInputs')"/>
+                  oninput="otpNext(this,4,'otpInputs')" onkeydown="otpBack(event,4,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
             <input type="text" maxlength="1"
-                  oninput="otpNext(this,5,'otpInputs')" onkeydown="otpBack(event,5,'otpInputs')"/>
+                  oninput="otpNext(this,5,'otpInputs')" onkeydown="otpBack(event,5,'otpInputs')" onpaste="handleOtpPaste(event,'otpInputs')"/>
           </div>
 
           <button class="btn" onclick="verifyOtp(this)">VERIFY CODE →</button>
@@ -162,17 +162,17 @@
 
         <div class="otp-group" id="modalOtpInputs">
           <input type="text" maxlength="1"
-                oninput="otpNext(this,0,'modalOtpInputs')" onkeydown="otpBack(event,0,'modalOtpInputs')"/>
+                oninput="otpNext(this,0,'modalOtpInputs')" onkeydown="otpBack(event,0,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
           <input type="text" maxlength="1"
-                oninput="otpNext(this,1,'modalOtpInputs')" onkeydown="otpBack(event,1,'modalOtpInputs')"/>
+                oninput="otpNext(this,1,'modalOtpInputs')" onkeydown="otpBack(event,1,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
           <input type="text" maxlength="1"
-                oninput="otpNext(this,2,'modalOtpInputs')" onkeydown="otpBack(event,2,'modalOtpInputs')"/>
+                oninput="otpNext(this,2,'modalOtpInputs')" onkeydown="otpBack(event,2,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
           <input type="text" maxlength="1"
-                oninput="otpNext(this,3,'modalOtpInputs')" onkeydown="otpBack(event,3,'modalOtpInputs')"/>
+                oninput="otpNext(this,3,'modalOtpInputs')" onkeydown="otpBack(event,3,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
           <input type="text" maxlength="1"
-                oninput="otpNext(this,4,'modalOtpInputs')" onkeydown="otpBack(event,4,'modalOtpInputs')"/>
+                oninput="otpNext(this,4,'modalOtpInputs')" onkeydown="otpBack(event,4,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
           <input type="text" maxlength="1"
-                oninput="otpNext(this,5,'modalOtpInputs')" onkeydown="otpBack(event,5,'modalOtpInputs')"/>
+                oninput="otpNext(this,5,'modalOtpInputs')" onkeydown="otpBack(event,5,'modalOtpInputs')" onpaste="handleOtpPaste(event,'modalOtpInputs')"/>
         </div>
 
         <button class="btn" onclick="verifyModalOtp(this)">VERIFY & CONTINUE →</button>

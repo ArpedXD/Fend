@@ -70,6 +70,22 @@ function otpBack(e, idx, groupId) {
   if (e.key === 'Backspace' && !inputs[idx].value && idx > 0) inputs[idx - 1].focus();
 }
 
+function handleOtpPaste(e, groupId) {
+  e.preventDefault();
+  const paste = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
+  const inputs = document.querySelectorAll(`#${groupId} input`);
+  
+  for (let i = 0; i < inputs.length && i < paste.length; i++) {
+    inputs[i].value = paste[i];
+  }
+  
+  // Focus the last filled input or the next empty one
+  const lastFilledIndex = Math.min(paste.length - 1, inputs.length - 1);
+  if (lastFilledIndex >= 0) {
+    inputs[lastFilledIndex].focus();
+  }
+}
+
 // ── Countdown helper ──────────────────────────────────────────────────────
 function startCountdown(btnId, cdId, intervalRef) {
   let s = 30;
