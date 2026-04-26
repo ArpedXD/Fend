@@ -1,4 +1,4 @@
-const BASE = 'https://bend-production-72e5.up.railway.app';
+const BASE = 'https://bend-sprp.onrender.com';
 
 if(localStorage.getItem("login") == "true"){
   window.location.href = 'index.html';
