@@ -14,12 +14,12 @@ function setEnemyTotal(val) {
 
 // ── FETCH HELPERS ──────────────────────────────────────────────
 async function getnumberU() {
-    const res = await fetch("http://bend-production-72e5.up.railway.app/blackjack/number");
+    const res = await fetch("https://bend-production-72e5.up.railway.app/blackjack/number");
     return res.json();
 }
 
 async function getnumberO() {
-    const res = await fetch("http://bend-production-72e5.up.railway.app/blackjack/number2");
+    const res = await fetch("https://bend-production-72e5.up.railway.app/blackjack/number2");
     return res.json();
 }
 
