@@ -642,7 +642,7 @@ html, body {
     text-align: center;
     padding:2vh;
     font-size: 200%;
-    font-family:var(--font-display);
+    font-family:"courier";
     height:80vh;
     width:100vh;;
     position:fixed;
