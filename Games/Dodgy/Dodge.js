@@ -188,15 +188,15 @@ function loseGame() {
 // ── BACKEND ───────────────────────────────────────────────────────────────────
 
 async function decis(result) {
-    await fetch("http://bend-production-72e5.up.railway.app/Dodge/end", {
-       method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        a: result,
-        b: localStorage.getItem("username")
-    })
+    alert(result)
+    await fetch("https://bend-production-72e5.up.railway.app/Dodge/end", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"},
+        body: JSON.stringify({
+            a: result,
+            b: localStorage.getItem("username")
+        })
     });
 }
 

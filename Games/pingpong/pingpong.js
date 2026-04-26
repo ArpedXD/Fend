@@ -205,7 +205,7 @@ function endGame(winner) {
 }
 
 async function decis(win){
-    await fetch("http://bend-production-72e5.up.railway.app/pingpong/end", {
+    await fetch("https://bend-production-72e5.up.railway.app/pingpong/end", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
