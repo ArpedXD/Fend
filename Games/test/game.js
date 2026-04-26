@@ -292,7 +292,7 @@ function toast(msg) {
 }
 
 async function decis(win){
-    await fetch("https://bend-production-72e5.up.railway.app/bird/end", {
+    await fetch("https://bend-production-72e5.up.railway.app/bird/end", { //test
     method: "POST",
     headers: {
         "Content-Type": "application/json",
