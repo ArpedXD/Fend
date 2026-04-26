@@ -1,5 +1,9 @@
 const BASE = 'https://bend-sprp.onrender.com';
 
+if(localStorage.getItem("login") == "true"){
+  window.location.href = 'index.html';
+}
+
 // ── State ─────────────────────────────────────────────────────────────────
 let otpCountdownInterval;   // forgot-pw page countdown
 let modalCountdownInterval; // modal countdown
