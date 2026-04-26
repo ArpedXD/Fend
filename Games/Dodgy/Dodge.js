@@ -187,8 +187,7 @@ function loseGame() {
 
 // ── BACKEND ───────────────────────────────────────────────────────────────────
 
-async function decis(result) {
-    alert(result)
+async function decis(result){
     await fetch("https://bend-production-72e5.up.railway.app/Dodge/end", {
         method: "POST",
         headers: {
