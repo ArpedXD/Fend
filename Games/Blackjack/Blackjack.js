@@ -24,12 +24,12 @@ async function getnumberO() {
 }
 
 async function fetchPlayerTotal() {
-    const res = await fetch("http://bend-production-72e5.up.railway.app/blackjack/getTotal");
+    const res = await fetch("https://bend-production-72e5.up.railway.app/blackjack/getTotal");
     return res.json();
 }
 
 async function fetchEnemyTotal() {
-    const res = await fetch("http://bend-production-72e5.up.railway.app/blackjack/getEnemy");
+    const res = await fetch("https://bend-production-72e5.up.railway.app/blackjack/getEnemy");
     return res.json();
 }
 
@@ -45,7 +45,7 @@ async function start() {
     setEnemyTotal(null);
 
     try {
-        await fetch("http://bend-production-72e5.up.railway.app/blackjack/start");
+        await fetch("https://bend-production-72e5.up.railway.app/blackjack/start");
 
         const nameRes  = localStorage.getItem("username");
         document.getElementById('uname_val').textContent = nameRes;
