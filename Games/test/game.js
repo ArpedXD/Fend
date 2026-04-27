@@ -143,6 +143,7 @@ function game(){
             lose.innerHTML = losee;
             ended = true;
         }
+        game_score.innerHTML = `Score : ${gamescore}`;
         menu()
     }else{
         if(falling == true){
