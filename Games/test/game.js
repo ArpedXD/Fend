@@ -60,6 +60,7 @@ function game(){
             console.log("They touched!");
             if(!AI){
                 decis("lose")
+                gamescore = 0
                 losee++;
                 lose.innerHTML = losee;
                 ended = true;
@@ -121,7 +122,8 @@ function game(){
             game_score.innerHTML = `Score : ${gamescore}`;
             console.log("They touched!");
             if(!AI){
-                decis("lose")
+                decis("lose");
+                gamescore = 0;
                 losee++;
                 lose.innerHTML = losee;
                 ended = true;
@@ -135,7 +137,8 @@ function game(){
     if(je.offsetTop + je.getBoundingClientRect().height > window.innerHeight || je.offsetTop < 0){
         ended = true;
         if(!AI){
-            decis("lose")
+            decis("lose");
+            gamescore = 0;
             losee++;
             lose.innerHTML = losee;
             ended = true;
