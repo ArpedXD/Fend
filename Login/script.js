@@ -193,7 +193,6 @@ async function verifyModalOtp(btn) {
 
     // Parse response as text (or JSON if backend returns JSON)
     const text = await res.text();
-    console.log('OTP verification response:', text);
 
     // ✅ Strict check: Only mark verified if backend says exactly 'OTP valid'
     verified = text.trim() === 'OTP valid';
@@ -274,7 +273,6 @@ async function doLogin(btn) {
       return;
     }
     
-    console.log('Email found for user:', email);
   } catch (err) {
     console.error('Email lookup error:', err);
     toast('Failed to lookup email', 'error');
@@ -314,7 +312,6 @@ async function doLogin(btn) {
       body: JSON.stringify({ email: email })
     });
     const text = await res.text();
-    console.log('Send OTP response:', text);
     
     if (!text.includes('sent') && !text.includes('Sent') && !text.includes('OTP sent')) {
       toast(text || 'Failed to send OTP', 'error');
@@ -384,7 +381,6 @@ async function doSignup(btn) {
     }
   } catch (err) {
     // Continue anyway - the server will handle duplicate checks
-    console.log('Username check error:', err);
   }
 
   btn.classList.add('loading');
@@ -399,7 +395,6 @@ async function doSignup(btn) {
       body: JSON.stringify({ email: email })
     });
     const text = await res.text();
-    console.log('Signup OTP response:', text);
     
     if (text.toLowerCase().includes('sent') || text.toLowerCase().includes('success')) {
       toast('OTP sent to ' + email);
@@ -425,7 +420,6 @@ async function completeSignup() {
   if (!pendingPayload) return;
   
   try {
-    console.log('Completing signup for:', pendingPayload.username);
     
     const res = await fetch(`${BASE}/base/register`, {
       method: 'POST',
@@ -438,7 +432,6 @@ async function completeSignup() {
     });
     
     const text = await res.text();
-    console.log('Registration response:', text);
     
     // Check for various success indicators
     if (text.toLowerCase().includes('success') || 
@@ -473,7 +466,6 @@ async function sendOtp(btn) {
       body: JSON.stringify({ email })
     });
     const text = await res.text();
-    console.log('Forgot password OTP response:', text);
     
     if (text.includes('sent') || text.includes('Sent') || text.includes('OTP sent')) {
       toast('OTP sent to ' + email);
@@ -524,7 +516,6 @@ async function verifyOtp(btn) {
       body: JSON.stringify({ email: document.getElementById('otp-email').value.trim(), otp: code })
     });
     const text = await res.text();
-    console.log('Verify OTP response:', text);
     
     if (text.includes('valid') || text.includes('Valid') || text.includes('OTP valid')) {
       toast('OTP verified!');
